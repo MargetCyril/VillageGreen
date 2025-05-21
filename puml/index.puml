@@ -1,0 +1,113 @@
+@startuml
+class Produit {
+	**id : int**
+	id_produit : int
+	libelle : string
+	actif : bool
+	description : string
+	prix : string
+	photo : string
+	ref_fournisseur : string
+	stock : int
+	<color:#0000dd>libelle_sousrub : SousRubrique</color>
+}
+
+class Panier {
+	**id : int**
+	quantite : int
+	<color:#0000dd>id_produit : Produit</color>
+	<color:#0000dd>id_panier : Commande</color>
+}
+
+class Commande {
+	**id : int**
+	id_panier : int
+	prix_final : string
+	moyen_payement : string
+	total : string
+	date_achat : DateTime
+	reduction : string
+	<color:#0000dd>ref_user : User</color>
+}
+
+class Livrer {
+	**id : int**
+	quantite_livre : string
+	<color:#0000dd>id_produit : Produit[]</color>
+	<color:#0000dd>id_bon_livraison : BonLivraison[]</color>
+}
+
+class BonLivraison {
+	**id : int**
+	id_bon_livraison : int
+	date_envoi : DateTime
+}
+
+class Rubrique {
+	**id : int**
+	libelle_rub : string
+	nom : string
+	image : string
+}
+
+class Commercial {
+	**id : int**
+	<color:#0000dd>ref_commercial : User</color>
+	<color:#0000dd>Client : User[]</color>
+}
+
+class User {
+	**id : int**
+	email : string
+	roles : array
+	password : string
+	nom : string
+	prenom : string
+	siret : string
+	id_pro : string
+	adresse_livraison : string
+	adresse_facturation : string
+	ville_livraison : string
+	ville_facturation : string
+	code_postal_livraison : string
+	code_postal_facturation : string
+	ref_fournisseur : string
+	coeff_achat : string
+	<color:#0000dd>commercial : Commercial</color>
+}
+
+class Facture {
+	**id : int**
+	date_facture : DateTime
+	livreur : string
+	suivi : string
+	<color:#0000dd>id_panier : Commande</color>
+	<color:#0000dd>id_bon_livraison : BonLivraison[]</color>
+}
+
+class SousRubrique {
+	**id : int**
+	libelle_sousrub : string
+	nom : string
+	image : string
+	<color:#0000dd>libelle_rub : Rubrique</color>
+}
+
+Produit "*"--"1" SousRubrique
+Panier "*"--"1" Produit
+Panier "*"--"1" Commande
+Commande "*"--"1" User
+Livrer "*"--"*" Produit
+Livrer "1"--"*" BonLivraison
+Commercial "1"--"1" User
+Commercial "1"--"*" User
+Facture "1"--"1" Commande
+Facture "1"--"*" BonLivraison
+SousRubrique "*"--"1" Rubrique
+
+
+hide methods
+
+hide circle
+
+@enduml

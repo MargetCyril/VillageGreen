@@ -83,7 +83,15 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "fixtures":
+    [
+        "symfony console d:d:d --force --if-exists",
+        "symfony console d:d:c",
+        "symfony console d:s:u --force",
+        "symfony console d:f:l --no-interaction --append",
+        "symfony console make:puml"
+    ]
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -95,6 +103,7 @@
         }
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^4.1",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "6.4.*",
         "symfony/css-selector": "6.4.*",
