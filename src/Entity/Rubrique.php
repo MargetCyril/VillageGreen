@@ -16,13 +16,19 @@ class Rubrique
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $libelle_rub = null;
+    private ?string $libelle = null;
 
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
+
+    /**
+     * @var Collection<int, SousRubrique>
+     */
+    #[ORM\OneToMany(targetEntity: SousRubrique::class, mappedBy: 'rubrique')]
+    private Collection $sousRubriques;
 
     public function __construct()
     {
@@ -34,14 +40,14 @@ class Rubrique
         return $this->id;
     }
 
-    public function getLibelleRub(): ?string
+    public function getLibelle(): ?string
     {
-        return $this->libelle_rub;
+        return $this->libelle;
     }
 
-    public function setLibelleRub(string $libelle_rub): static
+    public function setLibelle(string $libelle): static
     {
-        $this->libelle_rub = $libelle_rub;
+        $this->libelle = $libelle;
 
         return $this;
     }
@@ -66,6 +72,36 @@ class Rubrique
     public function setImage(string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SousRubrique>
+     */
+    public function getSousRubriques(): Collection
+    {
+        return $this->sousRubriques;
+    }
+
+    public function addSousRubrique(SousRubrique $sousRubrique): static
+    {
+        if (!$this->sousRubriques->contains($sousRubrique)) {
+            $this->sousRubriques->add($sousRubrique);
+            $sousRubrique->setRubrique($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSousRubrique(SousRubrique $sousRubrique): static
+    {
+        if ($this->sousRubriques->removeElement($sousRubrique)) {
+            // set the owning side to null (unless already changed)
+            if ($sousRubrique->getRubrique() === $this) {
+                $sousRubrique->setRubrique(null);
+            }
+        }
 
         return $this;
     }

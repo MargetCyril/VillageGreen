@@ -16,7 +16,7 @@ class SousRubrique
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $libelle_sousrub = null;
+    private ?string $libelle = null;
 
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
@@ -24,22 +24,35 @@ class SousRubrique
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
+    /**
+     * @var Collection<int, Produit>
+     */
+    #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'sousRubrique')]
+    private Collection $produits;
+
     #[ORM\ManyToOne(inversedBy: 'sousRubriques')]
-    private ?Rubrique $libelle_rub = null;
+    private ?Rubrique $rubrique = null;
+
+    public function __construct()
+    {
+        $this->produits = new ArrayCollection();
+    }
+
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getLibelleSousrub(): ?string
+    public function getLibelle(): ?string
     {
-        return $this->libelle_sousrub;
+        return $this->libelle;
     }
 
-    public function setLibelleSousrub(string $libelle_sousrub): static
+    public function setLibelle(string $libelle): static
     {
-        $this->libelle_sousrub = $libelle_sousrub;
+        $this->libelle = $libelle;
 
         return $this;
     }
@@ -68,28 +81,46 @@ class SousRubrique
         return $this;
     }
 
-    public function getLibelleRub(): ?Rubrique
+    /**
+     * @return Collection<int, Produit>
+     */
+    public function getProduits(): Collection
     {
-        return $this->libelle_rub;
+        return $this->produits;
     }
 
-    public function setLibelleRub(?Rubrique $libelle_rub): static
+    public function addProduit(Produit $produit): static
     {
-        $this->libelle_rub = $libelle_rub;
+        if (!$this->produits->contains($produit)) {
+            $this->produits->add($produit);
+            $produit->setSousRubrique($this);
+        }
 
         return $this;
     }
-
 
     public function removeProduit(Produit $produit): static
     {
         if ($this->produits->removeElement($produit)) {
             // set the owning side to null (unless already changed)
-            if ($produit->getLibelleSousrub() === $this) {
-                $produit->setLibelleSousrub(null);
+            if ($produit->getSousRubrique() === $this) {
+                $produit->setSousRubrique(null);
             }
         }
 
         return $this;
     }
+
+    public function getRubrique(): ?Rubrique
+    {
+        return $this->rubrique;
+    }
+
+    public function setRubrique(?Rubrique $rubrique): static
+    {
+        $this->rubrique = $rubrique;
+
+        return $this;
+    }
+
 }

@@ -16,9 +16,6 @@ class Produit
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $id_produit = null;
-
     #[ORM\Column(length: 255)]
     private ?string $libelle = null;
 
@@ -41,8 +38,9 @@ class Produit
     private ?int $stock = null;
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
-    private ?SousRubrique $libelle_sousrub = null;
+    private ?SousRubrique $sousRubrique = null;
 
+   
 
     public function __construct()
     {
@@ -52,18 +50,6 @@ class Produit
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdProduit(): ?int
-    {
-        return $this->id_produit;
-    }
-
-    public function setIdProduit(int $id_produit): static
-    {
-        $this->id_produit = $id_produit;
-
-        return $this;
     }
 
     public function getLibelle(): ?string
@@ -150,17 +136,19 @@ class Produit
         return $this;
     }
 
-    public function getLibelleSousrub(): ?SousRubrique
+    public function getSousRubrique(): ?SousRubrique
     {
-        return $this->libelle_sousrub;
+        return $this->sousRubrique;
     }
 
-    public function setLibelleSousrub(?SousRubrique $libelle_sousrub): static
+    public function setSousRubrique(?SousRubrique $sousRubrique): static
     {
-        $this->libelle_sousrub = $libelle_sousrub;
+        $this->sousRubrique = $sousRubrique;
 
         return $this;
     }
+
+  
 
    
 }

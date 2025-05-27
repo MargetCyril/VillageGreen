@@ -68,7 +68,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $coeff_achat = null;
 
     #[ORM\ManyToOne(inversedBy: 'Client')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Commercial $commercial = null;
 
     public function getId(): ?int

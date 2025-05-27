@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,9 +15,6 @@ class Commande
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-    #[ORM\Column]
-    private ?int $id_panier = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 8, scale: 2, nullable: true)]
     private ?string $prix_final = null;
@@ -36,21 +35,20 @@ class Commande
     #[ORM\JoinColumn(nullable: false)]
     private ?User $ref_user = null;
 
+    /**
+     * @var Collection<int, panier>
+     */
+    #[ORM\OneToMany(targetEntity: panier::class, mappedBy: 'commande')]
+    private Collection $id_panier;
+
+    public function __construct()
+    {
+        $this->id_panier = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdPanier(): ?int
-    {
-        return $this->id_panier;
-    }
-
-    public function setIdPanier(int $id_panier): static
-    {
-        $this->id_panier = $id_panier;
-
-        return $this;
     }
 
     public function getPrixFinal(): ?string
@@ -121,6 +119,36 @@ class Commande
     public function setRefUser(?User $ref_user): static
     {
         $this->ref_user = $ref_user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, panier>
+     */
+    public function getIdPanier(): Collection
+    {
+        return $this->id_panier;
+    }
+
+    public function addIdPanier(panier $idPanier): static
+    {
+        if (!$this->id_panier->contains($idPanier)) {
+            $this->id_panier->add($idPanier);
+            $idPanier->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdPanier(panier $idPanier): static
+    {
+        if ($this->id_panier->removeElement($idPanier)) {
+            // set the owning side to null (unless already changed)
+            if ($idPanier->getCommande() === $this) {
+                $idPanier->setCommande(null);
+            }
+        }
 
         return $this;
     }

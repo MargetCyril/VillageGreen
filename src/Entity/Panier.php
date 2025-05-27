@@ -20,8 +20,8 @@ class Panier
     #[ORM\JoinColumn(nullable: false)]
     private ?Produit $id_produit = null;
 
-    #[ORM\ManyToOne]
-    private ?Commande $id_panier = null;
+    #[ORM\ManyToOne(inversedBy: 'id_panier')]
+    private ?Commande $commande = null;
 
     public function getId(): ?int
     {
@@ -52,14 +52,14 @@ class Panier
         return $this;
     }
 
-    public function getIdPanier(): ?Commande
+    public function getCommande(): ?Commande
     {
-        return $this->id_panier;
+        return $this->commande;
     }
 
-    public function setIdPanier(?Commande $id_panier): static
+    public function setCommande(?Commande $commande): static
     {
-        $this->id_panier = $id_panier;
+        $this->commande = $commande;
 
         return $this;
     }

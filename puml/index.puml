@@ -1,7 +1,6 @@
 @startuml
 class Produit {
 	**id : int**
-	id_produit : int
 	libelle : string
 	actif : bool
 	description : string
@@ -9,25 +8,25 @@ class Produit {
 	photo : string
 	ref_fournisseur : string
 	stock : int
-	<color:#0000dd>libelle_sousrub : SousRubrique</color>
+	<color:#0000dd>sousRubrique : SousRubrique</color>
 }
 
 class Panier {
 	**id : int**
 	quantite : int
 	<color:#0000dd>id_produit : Produit</color>
-	<color:#0000dd>id_panier : Commande</color>
+	<color:#0000dd>commande : Commande</color>
 }
 
 class Commande {
 	**id : int**
-	id_panier : int
 	prix_final : string
 	moyen_payement : string
 	total : string
 	date_achat : DateTime
 	reduction : string
 	<color:#0000dd>ref_user : User</color>
+	<color:#0000dd>id_panier : panier[]</color>
 }
 
 class Livrer {
@@ -45,9 +44,10 @@ class BonLivraison {
 
 class Rubrique {
 	**id : int**
-	libelle_rub : string
+	libelle : string
 	nom : string
 	image : string
+	<color:#0000dd>sousRubriques : SousRubrique[]</color>
 }
 
 class Commercial {
@@ -87,23 +87,25 @@ class Facture {
 
 class SousRubrique {
 	**id : int**
-	libelle_sousrub : string
+	libelle : string
 	nom : string
 	image : string
-	<color:#0000dd>libelle_rub : Rubrique</color>
+	<color:#0000dd>produits : Produit[]</color>
+	<color:#0000dd>rubrique : Rubrique</color>
 }
 
 Produit "*"--"1" SousRubrique
 Panier "*"--"1" Produit
 Panier "*"--"1" Commande
 Commande "*"--"1" User
+Commande "1"--"*" panier
 Livrer "*"--"*" Produit
 Livrer "1"--"*" BonLivraison
+Rubrique "1"--"*" SousRubrique
 Commercial "1"--"1" User
 Commercial "1"--"*" User
 Facture "1"--"1" Commande
 Facture "1"--"*" BonLivraison
-SousRubrique "*"--"1" Rubrique
 
 
 hide methods
