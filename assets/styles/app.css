@@ -1,3 +1,6 @@
+title {
+  color:#008000;
+}
 
 .velours{
    width: 100%;
@@ -11,6 +14,11 @@
  nav {
   background-color: #16161d;
   text-align:center;
+}
+
+nav a {
+  text-decoration: none;
+  color: white
 }
 
 ul.navbar-nav {

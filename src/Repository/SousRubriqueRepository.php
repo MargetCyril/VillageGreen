@@ -16,6 +16,17 @@ class SousRubriqueRepository extends ServiceEntityRepository
         parent::__construct($registry, SousRubrique::class);
     }
 
+    public function getSomeSousrub($id)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb 
+            ->andWhere('a.rubrique = :id')
+            ->setParameter('id', $id)
+            ->getQuery();
+        $categories = $qb->getQuery()-> getResult();
+
+        return $categories;
+    }
     //    /**
     //     * @return SousRubrique[] Returns an array of SousRubrique objects
     //     */

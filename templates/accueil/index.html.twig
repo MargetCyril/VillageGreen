@@ -4,8 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<br>
-	accueil
+	<br> 
 
 	<!-- Slideshow container -->
 	<div
@@ -48,22 +47,23 @@
 		<h3>
 
 			<div class="row">
+				{% for produit in produit %}
 				<div class="column">
 					<div class="card">
-						<img src="{{ asset("/img/GuitareClassique5.png")}}" alt="produit" class="card-img" style="width:100%">
+						<img src="{{ asset("/img/" ~ produit.photo)}}" alt="produit" class="card-img" style="width:100%">
 						<div class="container">
-							<h2>guitare</h2>
-							<p class="card-title">instrument corde</p>
-							<p class="card-desc">description produit lorem ipsum dore etc etc</p>
-							<p>prix</p>
+							<h2>{{produit.libelle}}</h2>
+							<p class="card-title">{{produit.sousrubrique.nom}}</p>
+							<p class="card-desc">{{produit.description}}</p>
+							<p>{{produit.prix}}</p>
 							<p>
 								<button class="button-card">Commander</button>
 							</p>
 						</div>
 					</div>
 				</div>
-
-
+				{% endfor %}
+{# 
 				<div class="column">
 					<div class="card">
 						<img src="{{ asset("/img/piano.jpeg")}}" alt="produit" class="card-img" style="width:100%">
@@ -93,7 +93,7 @@
 							</p>
 						</div>
 					</div>
-				</div>
+				</div> #}
       </div>
 
 				 <script>
@@ -123,5 +123,5 @@
 					  slides[slideIndex-1].style.display = "block";  
 					  dots[slideIndex-1].className += " active";
 					}
-					</script>  
+					</script>
 			{% endblock %}

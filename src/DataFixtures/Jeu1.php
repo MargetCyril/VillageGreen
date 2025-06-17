@@ -19,11 +19,27 @@ class Jeu1 extends Fixture
         // $manager->persist($product);
         $rubrique1 = new Rubrique();
         
-        $rubrique1->setLibelle("instrument");
-        $rubrique1->setNom("Instrument");
+        $rubrique1->setLibelle("instruments");
+        $rubrique1->setNom("Instruments");
         $rubrique1->setImage("instrument.jpg");
 
         $manager->persist($rubrique1);
+
+        $rubrique2 = new Rubrique();
+        
+        $rubrique2->setLibelle("accessoires");
+        $rubrique2->setNom("accesoires");
+        $rubrique2->setImage("accessoires.jpg");
+
+        $manager->persist($rubrique2);
+
+        $rubrique3 = new Rubrique();
+        
+        $rubrique3->setLibelle("materiel");
+        $rubrique3->setNom("materiel");
+        $rubrique3->setImage("materiel.jpg");
+
+        $manager->persist($rubrique3);
 
         $sousrubrique1 = new SousRubrique();
 
@@ -35,19 +51,67 @@ class Jeu1 extends Fixture
 
         $manager->persist($sousrubrique1);
 
+        $sousrubrique2 = new SousRubrique();
+
+        $sousrubrique2->setLibelle("clavier");
+        $sousrubrique2->setNom("Clavier");
+        $sousrubrique2->setImage("clavier.jpg");
+
+        $sousrubrique2->setRubrique($rubrique1);
+
+        $manager->persist($sousrubrique2);
+
+        $sousrubrique3 = new SousRubrique();
+
+        $sousrubrique3->setLibelle("percussion");
+        $sousrubrique3->setNom("Instrument à percussion");
+        $sousrubrique3->setImage("percussion.jpg");
+
+        $sousrubrique3->setRubrique($rubrique1);
+
+        $manager->persist($sousrubrique3);
+
         $produit1 = new Produit();
 
-        $produit1->setLibelle("luth");
+        $produit1->setLibelle("guitare");
         $produit1->setactif("1");
-        $produit1->setdescription("un dur luth");
-        $produit1->setprix("69");
-        $produit1->setphoto("luth.jpg");
-        $produit1->setReffournisseur("Luth-à-tion");
+        $produit1->setdescription("instrument à cordes qui font ting ou tong");
+        $produit1->setprix("250.33");
+        $produit1->setphoto("GuitareClassique5.png");
+        $produit1->setReffournisseur("Guy Tare");
         $produit1->setstock("1");
 
         $produit1->setSousRubrique($sousrubrique1);
 
         $manager->persist($produit1);
+
+        $produit2 = new Produit();
+
+        $produit2->setLibelle("piano");
+        $produit2->setactif("1");
+        $produit2->setdescription("instrument à clavier qui va de ding a dong");
+        $produit2->setprix("595");
+        $produit2->setphoto("piano.jpeg");
+        $produit2->setReffournisseur("Piano Sano");
+        $produit2->setstock("1");
+
+        $produit2->setSousRubrique($sousrubrique2);
+
+        $manager->persist($produit2);
+
+         $produit3 = new Produit();
+
+        $produit3->setLibelle("batterie");
+        $produit3->setactif("1");
+        $produit3->setdescription("instrument à percussion pour faire pudum tchii");
+        $produit3->setprix("10.50");
+        $produit3->setphoto("batterie.jpg");
+        $produit3->setReffournisseur("Dur a Sell");
+        $produit3->setstock("1");
+
+        $produit3->setSousRubrique($sousrubrique3);
+
+        $manager->persist($produit3);
 
         $panier1 = new Panier();
 

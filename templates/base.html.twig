@@ -27,11 +27,7 @@
 				<div class="row">
 					<h1>village green</h1>
 
-					<div class="search me-auto">{# {{search|raw}} #}</div>
-					<form method="post" action="search.php">
-						<label for="recherche"></label>
-						<input type="text" name="recherche" id="recherche" placeholder="recherche...">
-					</form>
+					<div class="search me-auto">{{search|raw}}</div>
 				</div>
 			</div>
 		</header>
@@ -44,7 +40,7 @@
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav ">
 					<li class="nav-item">
-						<button class="btn-accueil" style="margin-left:1rem" >Accueil</button>
+						<button class="btn-accueil" style="margin-left:1rem" ><a href='/'>Accueil</button>
 						{# <div class="dropdown">
 							<button class="btn">
 								<i class="fa fa-caret-down"></i>
@@ -55,8 +51,10 @@
 							</div>
 						</div> #}
 					</li>
+					{% for rubrique in rubrique %}
 					<li class="nav-item">
-						<button class="btn">Instrument</button>
+						<button class="btn">
+						<a href='/rubrique?id={{rubrique.id}}'>{{rubrique.nom}} </a></button>
 						<div class="dropdown">
 							<button class="btn">
 								<i class="fa fa-caret-down"></i>
@@ -67,30 +65,8 @@
 							</div>
 						</div>
 					</li>
-					<li class="nav-item">
-						<button class="btn">Accessoires</button>
-						<div class="dropdown">
-							<button class="btn">
-								<i class="fa fa-caret-down"></i>
-							</button>
-							<div class="dropdown-content">
-								<a href="#">Link1</a>
-								<a href="#">Link2</a>
-							</div>
-						</div>
-					</li>
-					<li class="nav-item">
-						<button class="btn">Materiel</button>
-						<div class="dropdown">
-							<button class="btn">
-								<i class="fa fa-caret-down"></i>
-							</button>
-							<div class="dropdown-content">
-								<a href="#">Link1</a>
-								<a href="#">Link2</a>
-							</div>
-						</div>
-					</li>
+					{% endfor %}
+					
 					<li class="nav-item">
 						<button class="btn">Mon compte</button>
 						<div class="dropdown">
@@ -102,7 +78,7 @@
 								<a href="#">Link2</a>
 							</div>
 						</div>
-					</li>
+					</li> 
 				</ul>
 			</div>
 

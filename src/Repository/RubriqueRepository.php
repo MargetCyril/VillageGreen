@@ -16,6 +16,18 @@ class RubriqueRepository extends ServiceEntityRepository
         parent::__construct($registry, Rubrique::class);
     }
 
+    public function getSomeRub($id)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb 
+            ->andWhere('a.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery();
+        $categories = $qb->getQuery()-> getResult();
+
+        return $categories;
+    }
+
     //    /**
     //     * @return Rubrique[] Returns an array of Rubrique objects
     //     */

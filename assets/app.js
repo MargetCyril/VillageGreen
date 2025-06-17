@@ -38,8 +38,6 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 	  dots[slideIndex-1].className += " active";
 	}
 
-
-
 /* FIN SLIDESHOW */
 
 console.log(slideIndex);
