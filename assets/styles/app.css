@@ -2,6 +2,11 @@ title {
   color:#008000;
 }
 
+btn-lien{
+  color: white;
+  text-decoration: none;
+}
+
 .velours{
    width: 100%;
     background-image: url("../img/red_velvet.jpg");
@@ -63,6 +68,7 @@ ul.navbar-nav {
   position: absolute;
   background-color: #f1f1f1;
   min-width: 160px;
+  z-index: 10000;
 }
 
 /* Links inside the dropdown */

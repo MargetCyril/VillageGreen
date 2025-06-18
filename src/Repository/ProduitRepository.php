@@ -24,6 +24,7 @@ class ProduitRepository extends ServiceEntityRepository
             ->setParameter('id', $id)
             ->getQuery();
         $categories = $qb->getQuery()-> getResult();
+        return $categories;
     }
 
     //    /**

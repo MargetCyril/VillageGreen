@@ -51,17 +51,18 @@
 							</div>
 						</div> #}
 					</li>
-					{% for rubrique in rubrique %}
+					{% for rubrique in rubriques %}
 					<li class="nav-item">
 						<button class="btn">
-						<a href='/rubrique?id={{rubrique.id}}'>{{rubrique.nom}} </a></button>
+						<a href='/rubrique?rid={{rubrique.id}}'>{{rubrique.nom}} </a></button>
 						<div class="dropdown">
 							<button class="btn">
 								<i class="fa fa-caret-down"></i>
 							</button>
 							<div class="dropdown-content">
-								<a href="#">Link1</a>
-								<a href="#">Link2</a>
+							{% for sousRubrique in rubrique.sousRubriques %}
+								<a href="/sousrubrique?srid={{sousRubrique.id}}">{{ sousRubrique.nom}}</a>
+							{% endfor %}
 							</div>
 						</div>
 					</li>

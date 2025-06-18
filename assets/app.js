@@ -37,7 +37,8 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 	  slides[slideIndex-1].style.display = "block";  
 	  dots[slideIndex-1].className += " active";
 	}
-
+/* document.getElementById("prev").addEventListener("click", plusSlides(-1));
+document.getElementById("prev").addEventListener("click", plusSlides(1)); */
 /* FIN SLIDESHOW */
 
 console.log(slideIndex);

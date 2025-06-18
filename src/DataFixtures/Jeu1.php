@@ -71,6 +71,17 @@ class Jeu1 extends Fixture
 
         $manager->persist($sousrubrique3);
 
+        $sousrubrique4 = new SousRubrique();
+
+        $sousrubrique4->setLibelle("pédales");
+        $sousrubrique4->setNom("pédales");
+        $sousrubrique4->setImage("pedales.jpg");
+
+        $sousrubrique4->setRubrique($rubrique2);
+
+        $manager->persist($sousrubrique4);
+
+
         $produit1 = new Produit();
 
         $produit1->setLibelle("guitare");

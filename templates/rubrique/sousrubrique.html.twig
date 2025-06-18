@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RubriqueController!{% endblock %}
+
+{% block body %}
+<h3 style="text-align: center">Nos Produits
+		<h3>
+
+			<div class="row">
+				{% for produit in produits %}
+				<div class="column">
+					<div class="card">
+						<img src="{{ asset("/img/" ~ produit.photo)}}" alt="produit" class="card-img" style="width:100%">
+						<div class="container">
+							<h2>{{produit.libelle}}</h2>
+							<p class="card-title">{{produit.sousrubrique.nom}}</p>
+							<p class="card-desc">{{produit.description}}</p>
+							<p>{{produit.prix}}</p>
+							<p>
+								<button class="button-card">Commander</button>
+							</p>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+{% endblock %}
