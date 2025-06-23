@@ -41,6 +41,8 @@ class Jeu1 extends Fixture
 
         $manager->persist($rubrique3);
 
+
+
         $sousrubrique1 = new SousRubrique();
 
         $sousrubrique1->setLibelle("corde");
@@ -80,6 +82,16 @@ class Jeu1 extends Fixture
         $sousrubrique4->setRubrique($rubrique2);
 
         $manager->persist($sousrubrique4);
+
+        $sousrubrique5 = new SousRubrique();
+
+        $sousrubrique5->setLibelle("lutrin");
+        $sousrubrique5->setNom("lutrin");
+        $sousrubrique5->setImage("lutrin.jepg");
+
+        $sousrubrique5->setRubrique($rubrique3);
+
+        $manager->persist($sousrubrique5);
 
 
         $produit1 = new Produit();
@@ -123,6 +135,35 @@ class Jeu1 extends Fixture
         $produit3->setSousRubrique($sousrubrique3);
 
         $manager->persist($produit3);
+
+        $produit4 = new Produit();
+
+        $produit4->setLibelle("pédale");
+        $produit4->setactif("1");
+        $produit4->setdescription("accessoire pour faire des effets pas naturel");
+        $produit4->setprix("1846.33");
+        $produit4->setphoto("pedale.jpeg");
+        $produit4->setReffournisseur("Ped Al");
+        $produit4->setstock("1");
+
+        $produit4->setSousRubrique($sousrubrique4);
+
+        $manager->persist($produit4);
+
+        $produit5 = new Produit();
+
+        $produit5->setLibelle("lutrin");
+        $produit5->setactif("1");
+        $produit5->setdescription("meuble pour poser les partitions");
+        $produit5->setprix("18.50");
+        $produit5->setphoto("lutrin.jpeg");
+        $produit5->setReffournisseur("Luth Rin");
+        $produit5->setstock("1");
+
+        $produit5->setSousRubrique($sousrubrique5);
+
+        $manager->persist($produit5);
+
 
         $panier1 = new Panier();
 

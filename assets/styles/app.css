@@ -2,11 +2,6 @@ title {
   color:#008000;
 }
 
-btn-lien{
-  color: white;
-  text-decoration: none;
-}
-
 .velours{
    width: 100%;
     background-image: url("../img/red_velvet.jpg");
@@ -16,18 +11,13 @@ btn-lien{
     display: flex;
 }
 
- nav {
+/*  nav {
   background-color: #16161d;
-  text-align:center;
-}
+} */
 
 nav a {
   text-decoration: none;
   color: white
-}
-
-ul.navbar-nav {
-  width:max-content;
 }
 
 .nav-item{
@@ -43,13 +33,12 @@ ul.navbar-nav {
 
  /* Dropdown Button */
 .btn {
-  background-color: #2196F3;
   color: white;
   font-size: 16px;
 }
 
 .btn-accueil {
-  background-color: #2196F3;
+ /*  background-color: #2196F3; */
   color: white;
   font-size: 16px;
 }
