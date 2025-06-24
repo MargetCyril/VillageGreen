@@ -23,7 +23,7 @@ final class AccueilController extends AbstractController
 
     }
 
-    #[Route('/', name: 'app_accueil')]
+    #[Route('/accueil', name: 'app_accueil')]
     public function index(): Response
     {
         $search = '<form method="post" action="search.php">

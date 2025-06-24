@@ -30,16 +30,16 @@
 		</div>
 
 		<!-- Next and previous buttons -->
-		<a class="prev" id="prev" onclick="plusSlides(-1)">&#10094;</a>
-		<a class="next" id="next" onclick="plusSlides(1)">&#10095;</a>
+		<a class="prev" id="prev">&#10094;</a>
+		<a class="next" id="next">&#10095;</a>
 	</div>
 	<br>
 
 	<!-- The dots/circles -->
 	<div style="text-align:center">
-		<span class="dot" onclick="currentSlide(1)"></span>
-		<span class="dot" onclick="currentSlide(2)"></span>
-		<span class="dot" onclick="currentSlide(3)"></span>
+		<span class="dot" onclick="window.currentSlide(1)"></span>
+		<span class="dot" onclick="window.currentSlide(2)"></span>
+		<span class="dot" onclick="window.currentSlide(3)"></span>
 	</div>
 
 	<br>
@@ -97,7 +97,7 @@
       </div>
 
 				 <script>
-					let slideIndex = 1;
+				/*	let slideIndex = 1;
 					showSlides(slideIndex);
 					
 					function plusSlides(n) {
@@ -122,6 +122,6 @@
 					  }
 					  slides[slideIndex-1].style.display = "block";  
 					  dots[slideIndex-1].className += " active";
-					}
-					</script>
+					} */
+					</script> 
 			{% endblock %}
