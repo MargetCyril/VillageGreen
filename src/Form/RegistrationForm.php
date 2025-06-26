@@ -43,6 +43,17 @@ class RegistrationForm extends AbstractType
                     ]),
                 ],
             ])
+            ->add('nom')
+            ->add('prenom')
+            ->add('siret')
+            ->add('id_pro')
+            ->add('adresse_livraison')
+            ->add('adresse_facturation')
+            ->add('ville_livraison')
+            ->add('ville_facturation')
+            ->add('code_postal_livraison')
+            ->add('code_postal_facturation')
+
         ;
     }
 

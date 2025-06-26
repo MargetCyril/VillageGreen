@@ -46,7 +46,7 @@
 	<h3 style="text-align: center">Nos Produits
 		<h3>
 
-			<div class="row">
+			<div class="row" style="margin:auto">
 				{% for produit in produit %}
 				<div class="column">
 					<div class="card">
@@ -55,7 +55,7 @@
 							<h2>{{produit.libelle}}</h2>
 							<p class="card-title">{{produit.sousrubrique.nom}}</p>
 							<p class="card-desc">{{produit.description}}</p>
-							<p>{{produit.prix}}</p>
+							<p>{{produit.prix}} €</p>
 							<p>
 								<button class="button-card">Commander</button>
 							</p>
@@ -63,65 +63,7 @@
 					</div>
 				</div>
 				{% endfor %}
-{# 
-				<div class="column">
-					<div class="card">
-						<img src="{{ asset("/img/piano.jpeg")}}" alt="produit" class="card-img" style="width:100%">
-						<div class="container">
-							<h2>guitare</h2>
-							<p class="card-title">instrument corde</p>
-							<p class="card-desc">description produit lorem ipsum dore etc etc</p>
-							<p>prix</p>
-							<p>
-								<button class="button-card">Commander</button>
-							</p>
-						</div>
-					</div>
-				</div>
 
-
-				<div class="column">
-					<div class="card">
-						<img src="{{ asset("/img/batterie.jpg")}}" alt="produit" class="card-img" style="width:100%">
-						<div class="container">
-							<h2>guitare</h2>
-							<p class="card-title">instrument corde</p>
-							<p class="card-desc">description produit produit lorem ipsum dore etc etc</p>
-							<p>prix</p>
-							<p>
-								<button class="button-card">Commander</button>
-							</p>
-						</div>
-					</div>
-				</div> #}
       </div>
 
-				 <script>
-				/*	let slideIndex = 1;
-					showSlides(slideIndex);
-					
-					function plusSlides(n) {
-					  showSlides(slideIndex += n);
-					}
-					
-					function currentSlide(n) {
-					  showSlides(slideIndex = n);
-					}
-					
-					function showSlides(n) {
-					  let i;
-					  let slides = document.getElementsByClassName("mySlides");
-					  let dots = document.getElementsByClassName("dot");
-					  if (n > slides.length) {slideIndex = 1}    
-					  if (n < 1) {slideIndex = slides.length}
-					  for (i = 0; i < slides.length; i++) {
-					    slides[i].style.display = "none";  
-					  }
-					  for (i = 0; i < dots.length; i++) {
-					    dots[i].className = dots[i].className.replace(" active", "");
-					  }
-					  slides[slideIndex-1].style.display = "block";  
-					  dots[slideIndex-1].className += " active";
-					} */
-					</script> 
 			{% endblock %}

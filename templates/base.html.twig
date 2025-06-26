@@ -23,16 +23,20 @@
 
 		<header class="velours">
 			<div class="container-fluid">
-				<nav class="navbar navbar-expand-sm row justify-content-right">
-					<ul class="navbar-nav ">
+				<nav class="navbar navbar-expand-sm row ">
+					<ul class="navbar-nav float-right">
 						<li>
-							<button class="btn">
-								<a href='/'>Accueil</button>
-							</li>
+						<h1 style="color:green">village green</h1>
+
+						<div class="search me-auto">{{search|raw}}</div>
+						</li>
+						<div class="topnav-right">
+						<li >
+							<button class="btn"><a href='/accueil'>Accueil</a></button>
 						</li>
 						<li>
 							<div class="nav-item">
-								<button class="btn">Mon compte</button>
+								<button class="btn"><a href='/compte'>Mon compte</a></button>
 								<div class="dropdown">
 									<button class="btn">
 										<i class="fa fa-caret-down"></i>
@@ -44,14 +48,12 @@
 								</div>
 							</div>
 						</li>
-					</nav>
-						<h1 style="color:green">village green</h1>
-
-						<div class="search me-auto">{{search|raw}}</div>
-
-					</ul</div>
-				</div>
-			</header>
+						</div>
+						
+					</ul>
+				</nav>
+			</div>
+		</header>
 
 			<nav class="navbar navbar-expand-sm row " style="background-color: #16161d" >
 
@@ -60,10 +62,6 @@
 				</button>
 				<div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
 					<ul class="navbar-nav ">
-						<li class="nav-item">
-							<button class="btn" style="margin-left:1rem">
-								<a href='/'>Accueil</button>
-							</li>
 							{% for rubrique in rubriques %}
 								<li class="nav-item">
 									<button class="btn">

@@ -11,10 +11,6 @@ title {
     display: flex;
 }
 
-/*  nav {
-  background-color: #16161d;
-} */
-
 nav a {
   text-decoration: none;
   color: white
@@ -23,6 +19,10 @@ nav a {
 .nav-item{
   display: flex;
   margin-right:1rem;
+}
+
+.topnav-right {
+  margin-left: auto;
 }
 
 .search {
@@ -58,6 +58,7 @@ nav a {
   background-color: #f1f1f1;
   min-width: 160px;
   z-index: 10000;
+
 }
 
 /* Links inside the dropdown */
@@ -73,7 +74,7 @@ nav a {
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
-  display: block;
+  display:block;
 }
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
