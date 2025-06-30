@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ user.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Siret</th>
+                <td>{{ user.siret }}</td>
+            </tr>
+            <tr>
+                <th>Id_pro</th>
+                <td>{{ user.idPro }}</td>
+            </tr>
+            <tr>
+                <th>Adresse_livraison</th>
+                <td>{{ user.adresseLivraison }}</td>
+            </tr>
+            <tr>
+                <th>Adresse_facturation</th>
+                <td>{{ user.adresseFacturation }}</td>
+            </tr>
+            <tr>
+                <th>Ville_livraison</th>
+                <td>{{ user.villeLivraison }}</td>
+            </tr>
+            <tr>
+                <th>Ville_facturation</th>
+                <td>{{ user.villeFacturation }}</td>
+            </tr>
+            <tr>
+                <th>Code_postal_livraison</th>
+                <td>{{ user.codePostalLivraison }}</td>
+            </tr>
+            <tr>
+                <th>Code_postal_facturation</th>
+                <td>{{ user.codePostalFacturation }}</td>
+            </tr>
+            <tr>
+                <th>Ref_fournisseur</th>
+                <td>{{ user.refFournisseur }}</td>
+            </tr>
+            <tr>
+                <th>Coeff_achat</th>
+                <td>{{ user.coeffAchat }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_user_crud_index') }}">back to list</a>
+
+    <a href="{{ path('app_user_crud_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('user_crud/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <h1>User index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Siret</th>
+                <th>Id_pro</th>
+                <th>Adresse_livraison</th>
+                <th>Adresse_facturation</th>
+                <th>Ville_livraison</th>
+                <th>Ville_facturation</th>
+                <th>Code_postal_livraison</th>
+                <th>Code_postal_facturation</th>
+                <th>Ref_fournisseur</th>
+                <th>Coeff_achat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.siret }}</td>
+                <td>{{ user.idPro }}</td>
+                <td>{{ user.adresseLivraison }}</td>
+                <td>{{ user.adresseFacturation }}</td>
+                <td>{{ user.villeLivraison }}</td>
+                <td>{{ user.villeFacturation }}</td>
+                <td>{{ user.codePostalLivraison }}</td>
+                <td>{{ user.codePostalFacturation }}</td>
+                <td>{{ user.refFournisseur }}</td>
+                <td>{{ user.coeffAchat }}</td>
+                <td>
+                    <a href="{{ path('app_user_crud_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('app_user_crud_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="17">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_user_crud_new') }}">Create new</a>
+{% endblock %}
