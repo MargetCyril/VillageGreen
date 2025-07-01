@@ -26,14 +26,22 @@ public function __construct(RubriqueRepository $rubriqueRepo)
     #[Route(name: 'app_user_crud_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $search = "#";
         $rubriques = $this->rubriqueRepo->FindAll();
+        $user = $userRepository->findAll();
 
-        return $this->render('user_crud/index.html.twig', [
-            'users' => $userRepository->findAll(),
-            'search' => $search,
-            'rubriques' => $rubriques,
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->render('user_crud/index.html.twig', [
+                'users' => $user,
+                'search' => $search,
+                'rubriques' => $rubriques,
         ]);
+        } else {
+            $user = $this->getUser();
+            return $this->redirectToRoute('app_user_crud_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
+        }
+        
     }
 
     #[Route('/new', name: 'app_user_crud_new', methods: ['GET', 'POST'])]
@@ -43,6 +51,7 @@ public function __construct(RubriqueRepository $rubriqueRepo)
         $form = $this->createForm(UserForm::class, $user);
         $form->handleRequest($request);
         $search = "#";
+        $rubriques = $this->rubriqueRepo->FindAll();
 
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -56,6 +65,7 @@ public function __construct(RubriqueRepository $rubriqueRepo)
             'user' => $user,
             'form' => $form,
             'search' => $search,
+            'rubriques' => $rubriques,
         ]);
     }
 
@@ -63,10 +73,12 @@ public function __construct(RubriqueRepository $rubriqueRepo)
     public function show(User $user): Response
     {
         $search = "#";
+        $rubriques = $this->rubriqueRepo->FindAll();
 
         return $this->render('user_crud/show.html.twig', [
             'user' => $user,
             'search' => $search,
+            'rubriques' => $rubriques,
         ]);
     }
 
@@ -76,6 +88,7 @@ public function __construct(RubriqueRepository $rubriqueRepo)
         $form = $this->createForm(UserForm::class, $user);
         $form->handleRequest($request);
         $search = "#";
+        $rubriques = $this->rubriqueRepo->FindAll();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
@@ -87,6 +100,7 @@ public function __construct(RubriqueRepository $rubriqueRepo)
             'user' => $user,
             'form' => $form,
             'search' => $search,
+            'rubriques' => $rubriques,
         ]);
     }
 
