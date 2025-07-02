@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Compte{% endblock %}
+
+{% block body %}
+mon compte: <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+
+mes commandes: <a href="#">voir</a>
+
+
+{% endblock %}

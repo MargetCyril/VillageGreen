@@ -39,7 +39,7 @@ public function __construct(RubriqueRepository $rubriqueRepo)
         ]);
         } else {
             $user = $this->getUser();
-            return $this->redirectToRoute('app_user_crud_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_user_index', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
         }
         
     }
@@ -76,6 +76,19 @@ public function __construct(RubriqueRepository $rubriqueRepo)
         $rubriques = $this->rubriqueRepo->FindAll();
 
         return $this->render('user_crud/show.html.twig', [
+            'user' => $user,
+            'search' => $search,
+            'rubriques' => $rubriques,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_user_index', methods: ['GET'])]
+    public function userindex(User $user): Response
+    {
+        $search = "#";
+        $rubriques = $this->rubriqueRepo->FindAll();
+
+        return $this->render('user_crud/indexperso.html.twig', [
             'user' => $user,
             'search' => $search,
             'rubriques' => $rubriques,

@@ -187,9 +187,10 @@ class Jeu1 extends Fixture
 
         $user1 = new User();
 
-        $user1->setemail("testus@test.te");
+        $user1->setemail("admin@admin.admin");
         $user1->setnom("testus");
-        $user1->setpassword("0000000000000000");
+        $user1->setpassword('$2y$13$lqe8deptkcVxOfe3raKDhu8BVh/gumW2feCd3fEvBIKPyzLd4vX4C'); // password: admin
+        $user1->setRoles(["ROLE_ADMIN"]);
 
         $commande1->setRefUser($user1);
 

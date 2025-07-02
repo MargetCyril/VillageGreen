@@ -8,20 +8,8 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
                 <th>Email</th>
                 <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
             </tr>
             <tr>
                 <th>Nom</th>
@@ -29,8 +17,9 @@
             </tr>
             <tr>
                 <th>Prenom</th>
-                <td>{{ user.prenom }}</td>
+                <td>{{ user.prenom }}</td> 
             </tr>
+            {% if user.roles == ('ROLE_PRO') %}
             <tr>
                 <th>Siret</th>
                 <td>{{ user.siret }}</td>
@@ -39,37 +28,35 @@
                 <th>Id_pro</th>
                 <td>{{ user.idPro }}</td>
             </tr>
+            {% endif %}
+            <tr>
+                <th> <h3>Adresse de facturation</h3> </th>
+            <tr>
             <tr>
                 <th>Adresse_livraison</th>
                 <td>{{ user.adresseLivraison }}</td>
-            </tr>
-            <tr>
-                <th>Adresse_facturation</th>
-                <td>{{ user.adresseFacturation }}</td>
             </tr>
             <tr>
                 <th>Ville_livraison</th>
                 <td>{{ user.villeLivraison }}</td>
             </tr>
             <tr>
-                <th>Ville_facturation</th>
-                <td>{{ user.villeFacturation }}</td>
-            </tr>
-            <tr>
                 <th>Code_postal_livraison</th>
                 <td>{{ user.codePostalLivraison }}</td>
             </tr>
             <tr>
+                <th> <h3>Adresse de facturation</h3> </th>
+            <tr>
+                <th>Ville_facturation</th>
+                <td>{{ user.villeFacturation }}</td>
+            </tr>
+            <tr>
+                <th>Adresse_facturation</th>
+                <td>{{ user.adresseFacturation }}</td>
+            </tr>
+            <tr>
                 <th>Code_postal_facturation</th>
                 <td>{{ user.codePostalFacturation }}</td>
-            </tr>
-            <tr>
-                <th>Ref_fournisseur</th>
-                <td>{{ user.refFournisseur }}</td>
-            </tr>
-            <tr>
-                <th>Coeff_achat</th>
-                <td>{{ user.coeffAchat }}</td>
             </tr>
         </tbody>
     </table>
