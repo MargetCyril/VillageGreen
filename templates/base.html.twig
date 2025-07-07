@@ -26,69 +26,76 @@
 				<nav class="navbar navbar-expand-sm row ">
 					<ul class="navbar-nav float-right">
 						<li>
-						<h1 style="color:green">village green</h1>
+							<h1 style="color:green">village green</h1>
 
-						<div class="search me-auto">{{search|raw}}</div>
+							<div class="search me-auto">{{search|raw}}</div>
 						</li>
 						<div class="topnav-right">
-						<li >
-							<button class="btn"><a href='/accueil'>Accueil</a></button>
-						</li>
-						<li>
-							<div class="nav-item">
-								<button class="btn"><a href="{{ path('app_user_crud_index') }}">Mon compte</a></button>
-								<div class="dropdown">
+							<li>
+								<button class="btn">
+									<a href='/accueil'>Accueil</a>
+								</button>
+							</li>
+							<li>
+								<div class="nav-item">
 									<button class="btn">
-										<i class="fa fa-caret-down"></i>
+										<a href="{{ path('app_user_crud_index') }}">Mon compte</a>
 									</button>
-									<div class="dropdown-content">
-										<a href="/login">se connecter</a>
-										<a href="/register">s'inscrire</a>
+									<div class="dropdown">
+										{% if app.user %}
+											<button class="btn">
+												<i class="fa fa-caret-down"></i>
+											</button>
+											<div class="dropdown-content">
+												<a href="/logout">se deconnecter</a>
+												<a href="/register">s'inscrire</a>
+											</div>
+										{% else %}
+											<button class="btn">
+												<i class="fa fa-caret-down"></i>
+											</button>
+											<div class="dropdown-content">
+												<a href="/login">se connecter</a>
+												<a href="/register">s'inscrire</a>
+											</div>
+										{% endif %}
 									</div>
 								</div>
-							</div>
-						</li>
+							</li>
 						</div>
-						
+
 					</ul>
 				</nav>
 			</div>
 		</header>
 
-			<nav class="navbar navbar-expand-sm row " style="background-color: #16161d" >
+		<nav class="navbar navbar-expand-sm row " style="background-color: #16161d">
 
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
-					<ul class="navbar-nav ">
-							{% for rubrique in rubriques %}
-								<li class="nav-item">
-									<button class="btn">
-										<a href='/rubrique?rid={{rubrique.id}}'>{{rubrique.nom}}
-										</a>
-									</button>
-									<div class="dropdown">
-										<button class="btn">
-											<i class="fa fa-caret-down"></i>
-										</button>
-										<div class="dropdown-content">
-											{% for sousRubrique in rubrique.sousRubriques %}
-												<a href="/sousrubrique?srid={{sousRubrique.id}}">{{ sousRubrique.nom}}</a>
-											{% endfor %}
-										</div>
-									</div>
-								</li>
-							{% endfor %}
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
+				<ul class="navbar-nav ">
+					{% for rubrique in rubriques %}
+						<li class="nav-item">
+							<button class="btn">
+								<a href='/rubrique?rid={{rubrique.id}}'>{{rubrique.nom}}
+								</a>
+							</button>
+							<div class="dropdown">
+								<button class="btn">
+									<i class="fa fa-caret-down"></i>
+								</button>
+								<div class="dropdown-content">
+									{% for sousRubrique in rubrique.sousRubriques %}
+										<a href="/sousrubrique?srid={{sousRubrique.id}}">{{ sousRubrique.nom}}</a>
+									{% endfor %}
+								</div>
+							</div>
 						</li>
-					</ul>
-				</div>
-
-			</nav>
-
-
-			{% block body %}{% endblock %}
-			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-		</body>
+					{% endfor %}
+				</li>
+			</ul>
+		</div>
 	</body>
-</html>
+</html></nav>{% block body %}{% endblock %}<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script></body></body></html>

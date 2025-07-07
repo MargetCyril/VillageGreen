@@ -37,7 +37,8 @@ public function __construct(RubriqueRepository $rubriqueRepo)
                 'search' => $search,
                 'rubriques' => $rubriques,
         ]);
-        } else {
+        } 
+        else {
             $user = $this->getUser();
             return $this->redirectToRoute('app_user_index', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
         }
@@ -69,7 +70,7 @@ public function __construct(RubriqueRepository $rubriqueRepo)
         ]);
     }
 
-    #[Route('/{id}', name: 'app_user_crud_show', methods: ['GET'])]
+    #[Route('/{id}/show', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
         $search = "#";
@@ -99,6 +100,7 @@ public function __construct(RubriqueRepository $rubriqueRepo)
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(UserForm::class, $user);
+        $user->setRoles(["ROLE_USER"]);
         $form->handleRequest($request);
         $search = "#";
         $rubriques = $this->rubriqueRepo->FindAll();

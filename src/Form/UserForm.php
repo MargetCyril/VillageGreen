@@ -6,8 +6,10 @@ use App\Entity\Commercial;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class UserForm extends AbstractType
 {
@@ -15,8 +17,14 @@ class UserForm extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
-            ->add('password')
+            ->add('roles', ChoiceType::class, [
+                'expanded' =>true,
+                'multiple' =>true,
+                'choices'  => [
+                    'Admin' => "ROLE_ADMIN",
+                    'Utilisateur' => 'ROLE_USER',
+                ]])
+            ->add('password', HiddenType::class,)
             ->add('nom')
             ->add('prenom')
             ->add('siret')
