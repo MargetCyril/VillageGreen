@@ -16,6 +16,7 @@ class Panier {
 	quantite : int
 	<color:#0000dd>id_produit : Produit</color>
 	<color:#0000dd>commande : Commande</color>
+	prix : string
 }
 
 class Commande {

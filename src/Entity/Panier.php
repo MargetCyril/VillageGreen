@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PanierRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PanierRepository::class)]
@@ -22,6 +23,9 @@ class Panier
 
     #[ORM\ManyToOne(inversedBy: 'id_panier')]
     private ?Commande $commande = null;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
+    private ?string $prix = null;
 
     public function getId(): ?int
     {
@@ -60,6 +64,18 @@ class Panier
     public function setCommande(?Commande $commande): static
     {
         $this->commande = $commande;
+
+        return $this;
+    }
+
+    public function getPrix(): ?string
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(string $prix): static
+    {
+        $this->prix = $prix;
 
         return $this;
     }

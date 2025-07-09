@@ -164,35 +164,12 @@ class Jeu1 extends Fixture
 
         $manager->persist($produit5);
 
-
-        $panier1 = new Panier();
-
-        $panier1->setquantite("1");
-        $panier1->setIdProduit($produit1);
-        
-
-        $manager->persist($panier1);
-
-        $commande1 = new Commande();
-
-        $commande1->setPrixFinal("69");
-        $commande1->setMoyenPayement("carte");
-        $commande1->setTotal("69");
-        $commande1->setDateAchat( new \DateTime('05/27/2025'));
-        $commande1->setReduction("0");
-
-        $commande1->addIdPanier($panier1);
-
-        $manager->persist($commande1);
-
         $user1 = new User();
 
         $user1->setemail("admin@admin.admin");
         $user1->setnom("testus");
         $user1->setpassword('$2y$13$lqe8deptkcVxOfe3raKDhu8BVh/gumW2feCd3fEvBIKPyzLd4vX4C'); // password: admin
         $user1->setRoles(["ROLE_ADMIN"]);
-
-        $commande1->setRefUser($user1);
 
         $manager->persist($user1);
 
