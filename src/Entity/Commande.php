@@ -38,7 +38,7 @@ class Commande
     /**
      * @var Collection<int, panier>
      */
-    #[ORM\OneToMany(targetEntity: panier::class, mappedBy: 'commande')]
+    #[ORM\OneToMany(targetEntity: Panier::class, mappedBy: 'commande', cascade: ['persist'])]
     private Collection $id_panier;
 
     public function __construct()

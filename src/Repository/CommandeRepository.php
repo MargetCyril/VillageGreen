@@ -16,6 +16,17 @@ class CommandeRepository extends ServiceEntityRepository
         parent::__construct($registry, Commande::class);
     }
 
+     public function getSomeCommandes($id)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb 
+            ->andWhere('a.ref_user = :id')
+            ->setParameter('id', $id)
+            ->getQuery();
+        $commandes= $qb->getQuery()-> getResult();
+
+        return $commandes;
+      }
     //    /**
     //     * @return Commande[] Returns an array of Commande objects
     //     */
