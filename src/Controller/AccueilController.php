@@ -27,21 +27,31 @@ final class AccueilController extends AbstractController
     #[Route('/', name: 'app_accueil1')]
     public function index(): Response
     {
-        $search = '<form method="post" action="search.php">
-                    <label for="recherche"></label>
-                    <input type="text" name="recherche" id="recherche" placeholder="recherche...">
-                    </form>';
-        $rubriques = $this->rubriqueRepo->findAll();
         $produit = $this->produitRepo->findAll();
         $sousrub = $this->sousrubRepo->findAll();
 
         return $this->render('accueil/index.html.twig', [
             'controller_name' => 'AccueilController',
-            'rubriques' => $rubriques,
-            'search' => $search,
             'produit' => $produit,
             'sousrubrique' => $sousrub,
 
         ]);
     }
+
+
+    public function navbar(): Response
+    {
+        $search = '<form method="post" action="search.php">
+                    <label for="recherche"></label>
+                    <input type="text" name="recherche" id="recherche" placeholder="recherche...">
+                    </form>';
+        $rubriques = $this->rubriqueRepo->findAll();
+
+        return $this->render('navbar.html.twig', [
+            'rubriques' => $rubriques,
+            'search' => $search,
+
+        ]);
+    }
+
 }

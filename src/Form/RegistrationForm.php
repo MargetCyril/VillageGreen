@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -53,6 +54,7 @@ class RegistrationForm extends AbstractType
             ->add('ville_facturation')
             ->add('code_postal_livraison')
             ->add('code_postal_facturation')
+            ->add('coeff_achat', HiddenType::class, ['data' => '1'])
 
         ;
     }

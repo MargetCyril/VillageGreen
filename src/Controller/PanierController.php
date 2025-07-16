@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Produit;
 use App\Repository\ProduitRepository;
-use App\Repository\RubriqueRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -13,21 +12,9 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/panier', name: 'app_panier_')]
 class PanierController extends AbstractController
 {
-        private $rubriqueRepo;
-        private $produitRepo;
-
-        public function __construct(RubriqueRepository $rubriqueRepo, ProduitRepository $produitRepo)
-    {
-        $this->rubriqueRepo = $rubriqueRepo;
-        $this->produitRepo = $produitRepo;
-
-    } 
-
     #[Route('/', name: 'index')]
     public function index(SessionInterface $session, ProduitRepository $produitRepo)
     {
-        $search = "#";
-        $rubriques = $this->rubriqueRepo->FindAll();
 
         $panier = $session->get('panier', []);
 
@@ -43,11 +30,8 @@ class PanierController extends AbstractController
             ];
             $total += $produit->getPrix() * $quantite;
         }
-        /* dd($data); */
         return $this->render('panier/index.html.twig', [
             'data' => $data,
-            'search' => $search,
-            'rubriques' => $rubriques,
             'total' => $total
         ]);
         

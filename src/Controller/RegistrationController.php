@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Repository\RubriqueRepository;
 use App\Entity\User;
 use App\Form\RegistrationForm;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,22 +14,12 @@ use Symfony\Component\Routing\Attribute\Route;
 class RegistrationController extends AbstractController
 {
 
-private $rubriqueRepo;
-
-public function __construct(RubriqueRepository $rubriqueRepo)
-    {
-        $this->rubriqueRepo = $rubriqueRepo;
-    }
-
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationForm::class, $user);
         $form->handleRequest($request);
-        $search = "#";
-        $rubriques = $this->rubriqueRepo->FindAll();
-        
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var string $plainPassword */
@@ -49,8 +38,6 @@ public function __construct(RubriqueRepository $rubriqueRepo)
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
-            'search' => $search,
-            'rubriques' => $rubriques
         ]);
     }
 }

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommandeController!{% endblock %}
+
+{% block body %}
+<h1>Détail de la commande {{paniers.0.commande.id}} </h1>
+<table class="table">
+<thead>
+<tr>
+                <th>moyen de payement</th>
+                <th>total</th>
+                <th>dateachat</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ paniers.0.commande.moyenpayement}}</td>
+                <td>{{ paniers.0.commande.total }}</td>
+                <td>{{ paniers.0.commande.dateachat| date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+
+<thead>
+<tr>
+<th> Produit </th>
+<th> prix </th>
+<th> quantité </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{ paniers.0.idProduit.libelle }} </td>
+<td>{{ paniers.0.idProduit.prix }} </td>
+<td>{{ paniers.0.quantite }} </td>
+</tr>
+</tbody>
+
+{% endblock %}

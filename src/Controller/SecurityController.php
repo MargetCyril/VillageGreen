@@ -12,13 +12,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
 
-private $rubriqueRepo;
-
-public function __construct(RubriqueRepository $rubriqueRepo)
-    {
-        $this->rubriqueRepo = $rubriqueRepo;
-    }
-
 
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
@@ -28,16 +21,11 @@ public function __construct(RubriqueRepository $rubriqueRepo)
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-
-        $search = "#";
-        $rubriques = $this->rubriqueRepo->FindAll();
         
 
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
-            'search' => $search,
-            'rubriques' => $rubriques
         ]);
     }
 

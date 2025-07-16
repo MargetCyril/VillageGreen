@@ -28,17 +28,13 @@ public function __construct(RubriqueRepository $rubriqueRepo, SousRubriqueReposi
     #[Route('/rubrique', name: 'app_rubrique')]
     public function rubriqueid(Request $request): Response
     {
-        $search = '<form method="post" action="search.php">
-                    <label for="recherche"></label>
-                    <input type="text" name="recherche" id="recherche" placeholder="recherche...">
-                    </form>';
+        
         $param = $request->query->get('rid');
         $rubriques = $this->rubriqueRepo->FindAll();
         $sousrubrique = $this->sousrubRepo->getSomeSousrub($param);
 
         return $this->render('rubrique/rubrique.html.twig', [
             'controller_name' => 'RubriqueController',
-            'search' => $search,
             'rubriques' => $rubriques,
             'sousrubrique' => $sousrubrique,
         ]);
@@ -53,14 +49,11 @@ public function __construct(RubriqueRepository $rubriqueRepo, SousRubriqueReposi
                     </form>';
         $param = $request->query->get('srid');
         $rubriques = $this->rubriqueRepo->FindAll();
-        /* $sousrubriques = $this->sousrubRepo->getAll(); */
         $produits = $this->produitRepo->getSomeProduit($param);
 
         return $this->render('rubrique/sousrubrique.html.twig', [
             'controller_name' => 'RubriqueController',
-            'search' => $search,
             'rubriques' => $rubriques,
-            /* 'sousrubrique' => $sousrubriques, */
             'produits' => $produits,
         ]);
     }

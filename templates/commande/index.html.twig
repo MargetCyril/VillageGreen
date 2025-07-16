@@ -3,31 +3,31 @@
 {% block title %}Hello CommandeController!{% endblock %}
 
 {% block body %}
-<h1>User index</h1>
+<h1>Liste des commandes</h1>
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>prix</th>
+                {# <th>prix</th> #}
                 <th>moyen de payement</th>
                 <th>total</th>
                 <th>dateachat</th>
-                <th>reduction</th>
-                {# <th>Id_panier</th> #}
+               {#  <th>reduction</th>
+                 <th>Id_panier</th> #}
             </tr>
         </thead>
         <tbody>
         {% for commande in commandes %}
             <tr>
                 <td>{{ commande.id }}</td>
-                <td>{{ commande.prixfinal }}</td>
+                {# <td>{{ commande.prixfinal }}</td> #}
                 <td>{{ commande.moyenpayement}}</td>
                 <td>{{ commande.total }}</td>
                 <td>{{ commande.dateachat| date('Y-m-d H:i:s') }}</td>
-                <td>{{ commande.reduction}}</td>
-                {# <td>{{ commande.id_panier }}</td> #}
+                {# <td>{{ commande.reduction}}</td>
+                <td>{{ commande.id_panier }}</td> #}
                 <td>
-                    <a href="#">détail</a>
+                    <a href="{{ path('app_commande_detail', {id: commande.id}) }}">détail</a>
                 </td>
             </tr>
         {% else %}
