@@ -6,6 +6,7 @@
     <h1>User</h1>
 
     <table class="table">
+    {% for user in users %}
         <tbody>
             <tr>
                 <th>Email</th>
@@ -58,6 +59,7 @@
                 <th>Code_postal_facturation</th>
                 <td>{{ user.codePostalFacturation }}</td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
 

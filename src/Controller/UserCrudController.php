@@ -19,11 +19,13 @@ final class UserCrudController extends AbstractController
     public function index(UserRepository $userRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
-        $user = $userRepository->findAll();
+        $users = $userRepository->findAll();
 
         if ($this->isGranted('ROLE_ADMIN')) {
-            return $this->render('user_crud/index.html.twig', [
-                'users' => $user,
+            $user = $this->getUser();
+            return $this->render('compte/index.html.twig', [
+                'users' => $users,
+                'user' => $user,
 
         ]);
         } 
@@ -61,6 +63,17 @@ final class UserCrudController extends AbstractController
     {
 
         return $this->render('user_crud/show.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    #[Route('/admin/show', name: 'app_user_admin_show', methods: ['GET'])]
+    public function showadmin(UserRepository $userRepository, User $user): Response
+    {
+        $user = $userRepository->findAll();
+        
+        return $this->render('user_crud/show.html.twig', [
+            'user' => $user,
             'user' => $user,
         ]);
     }

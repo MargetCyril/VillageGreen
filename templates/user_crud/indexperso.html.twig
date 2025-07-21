@@ -3,6 +3,7 @@
 {% block title %}Mon Compte{% endblock %}
 
 {% block body %}
+<h1>Mon Compte</h1>
 mon compte: <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
 
 mes commandes: <a href="{{ path('app_commande_index')}}">voir</a>

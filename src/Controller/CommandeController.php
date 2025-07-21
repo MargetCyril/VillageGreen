@@ -95,14 +95,36 @@ final class CommandeController extends AbstractController
     }
 
     #[Route('/detail/{id}', name: 'detail')]
-    public function detail(Panier $panier, PanierRepository $panierRepo): Response
+    public function detail(Commande $commande, PanierRepository $panierRepo): Response
     {
-        $id = $panier->getid('id');
+        $id = $commande->getId();
         $paniers = $panierRepo->getSome($id);
-        //dd($paniers['0']);
+        //dd($paniers);
+        
 
         return $this->render('commande/detail.html.twig', [
             'paniers' => $paniers,
         ]);
+    }
+
+
+    #[Route('/admin', name: 'admin')]
+    public function admin(Commande $commande, PanierRepository $panierRepo): Response
+    {
+
+        if ($this->isGranted('ROLE_ADMIN')) {
+            
+            $paniers = $panierRepo->getAll();
+            
+            return $this->render('commande/detail.html.twig', [
+                'paniers' => $paniers,
+
+        ]);
+        } 
+        else {
+            $user = $this->getUser();
+            return $this->redirectToRoute('app_user_index', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
+        }
+
     }
 }

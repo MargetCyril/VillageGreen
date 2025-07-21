@@ -28,11 +28,13 @@
 </tr>
 </thead>
 <tbody>
+{% for paniers in paniers %}
 <tr>
-<td>{{ paniers.0.idProduit.libelle }} </td>
-<td>{{ paniers.0.idProduit.prix }} </td>
-<td>{{ paniers.0.quantite }} </td>
+<td>{{ paniers.idProduit.libelle }} </td>
+<td>{{ paniers.idProduit.prix }} </td>
+<td>{{ paniers.quantite }} </td>
 </tr>
+{% endfor %}
 </tbody>
 
 {% endblock %}
