@@ -26,6 +26,7 @@ final class UserCrudController extends AbstractController
             return $this->render('compte/index.html.twig', [
                 'users' => $users,
                 'user' => $user,
+                'id' => $user->getId()
 
         ]);
         } 
@@ -58,22 +59,22 @@ final class UserCrudController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/show', name: 'app_user_show', methods: ['GET'])]
+    #[Route('/show/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
-
+           // dd($user);
+           $user = [$user];
         return $this->render('user_crud/show.html.twig', [
             'user' => $user,
         ]);
     }
-
+ 
     #[Route('/admin/show', name: 'app_user_admin_show', methods: ['GET'])]
-    public function showadmin(UserRepository $userRepository, User $user): Response
+    public function adminshow(UserRepository $userRepository): Response
     {
         $user = $userRepository->findAll();
         
         return $this->render('user_crud/show.html.twig', [
-            'user' => $user,
             'user' => $user,
         ]);
     }

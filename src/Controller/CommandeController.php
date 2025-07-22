@@ -94,6 +94,20 @@ final class CommandeController extends AbstractController
         ]);
     }
 
+    #[Route('/adminindex', name: 'adminindex')]
+    public function adminindex(): Response
+    {
+        
+        $commande = $this->commandeRepo->findAll();
+        
+
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        return $this->render('commande/index.html.twig', [
+            'commandes' => $commande,
+        ]);
+    }
+
     #[Route('/detail/{id}', name: 'detail')]
     public function detail(Commande $commande, PanierRepository $panierRepo): Response
     {
