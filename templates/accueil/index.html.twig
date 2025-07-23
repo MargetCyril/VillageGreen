@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<br> 
+	<br>
 
 	<!-- Slideshow container -->
 	<div
@@ -43,27 +43,29 @@
 	</div>
 
 	<br>
-	<h3 style="text-align: center">Nos Produits
-		<h3>
+	<h3 style="text-align: center">Nos Produits</h3>
 
-			<div class="row" style="margin:auto">
-				{% for produit in produit %}
-				<div class="column">
-					<div class="card">
-						<img src="{{ asset("/img/" ~ produit.photo)}}" alt="produit" class="card-img" style="width:100%">
-						<div class="container">
-							<h2>{{produit.libelle}}</h2>
-							<p class="card-title">{{produit.sousrubrique.nom}}</p>
-							<p class="card-desc">{{produit.description}}</p>
-							<p>{{produit.prix}} €</p>
-							<p>
-								<button class="button-card"> <a href="{{ path('app_panier_add', {id: produit.id}) }}">Commander</a></button>
-							</p>
-						</div>
+	<div class="row" style="margin:auto">
+		{% for produit in produit %}
+			<div class="column">
+				<div class="card">
+					<img src="{{ asset("/img/" ~ produit.photo)}}" alt="produit" class="card-img" style="width:100%">
+					<div class="container">
+						<h2>{{produit.libelle}}</h2>
+						<p class="card-title">{{produit.sousrubrique.nom}}</p>
+						<p class="card-desc">{{produit.description}}</p>
+						<p>{{produit.prix}}
+							€</p>
+						<p>
+							<button class="button-card">
+								<a href="{{ path('app_panier_add', {id: produit.id}) }}">Commander</a>
+							</button>
+						</p>
 					</div>
 				</div>
-				{% endfor %}
+			</div>
+		{% endfor %}
 
-      </div>
+	</div>
 
-			{% endblock %}
+{% endblock %}

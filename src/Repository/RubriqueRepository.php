@@ -28,6 +28,18 @@ class RubriqueRepository extends ServiceEntityRepository
         return $categories;
     }
 
+    public function search($search)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb 
+            ->andWhere('a.libelle, a.image, a.nom = %:id%')
+            ->setParameter('id', $search)
+            ->getQuery();
+        $categories = $qb->getQuery()-> getResult();
+
+        return $categories;
+    }
+
     //    /**
     //     * @return Rubrique[] Returns an array of Rubrique objects
     //     */

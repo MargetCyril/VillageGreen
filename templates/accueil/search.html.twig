@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block body %}
+<h2> Résultat correspondant </h2>
+
+	<div class="row" style="margin:auto">
+		{% for produit in produit %}
+			<div class="column">
+				<div class="card">
+					<img src="{{ asset("/img/" ~ produit.photo)}}" alt="produit" class="card-img" style="width:100%">
+					<div class="container">
+						<h2>{{produit.libelle}}</h2>
+						<p class="card-title">{{produit.sousrubrique.nom}}</p>
+						<p class="card-desc">{{produit.description}}</p>
+						<p>{{produit.prix}}
+							€</p>
+						<p>
+							<button class="button-card">
+								<a href="{{ path('app_panier_add', {id: produit.id}) }}">Commander</a>
+							</button>
+						</p>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+
+	</div>
+
+{% endblock %}

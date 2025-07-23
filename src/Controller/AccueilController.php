@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\SearchForm;
 use App\Repository\SousRubriqueRepository;
 use App\Repository\ProduitRepository;
 use App\Repository\RubriqueRepository;
@@ -41,11 +42,15 @@ final class AccueilController extends AbstractController
 
     public function navbar(): Response
     {
-        $search = '<form method="post" action="search.php">
-                    <label for="recherche"></label>
-                    <input type="text" name="recherche" id="recherche" placeholder="recherche...">
-                    </form>';
+        $search = $this->createForm(SearchForm::class);
         $rubriques = $this->rubriqueRepo->findAll();
+
+        if ($search->isSubmitted() && $search->isValid()) {
+            $recherche = $search->getData();
+            return $this->redirectToRoute('app_search', [
+                'recherche' => $recherche,
+            ]);
+        }
 
         return $this->render('navbar.html.twig', [
             'rubriques' => $rubriques,
@@ -53,5 +58,21 @@ final class AccueilController extends AbstractController
 
         ]);
     }
+
+     #[Route('/search/{search}', name: 'app_search')]
+    public function search(): Response
+    {
+         $produit = $this->produitRepo->search();
+        $sousrub = $this->sousrubRepo->search(); 
+        $rubrique = $this->rubriqueRepo->search(); 
+
+        return $this->render('accueil/index.html.twig', [
+            'controller_name' => 'AccueilController',
+            'produit' => $produit,
+            'sousrubrique' => $sousrub,
+            'rubrique' => $rubrique,
+
+        ]);
+    } 
 
 }

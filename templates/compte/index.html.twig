@@ -6,14 +6,23 @@
 <h1>Mon Compte</h1>
 
 mon compte: <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-
+<br>
 mes commandes: <a href="{{ path('app_commande_index')}}">voir</a>
-
+<br>
+<br>
 <h1>Gestion du site</h1>
 
 liste des commandes: <a href="{{ path('app_commande_adminindex')}}">voir</a>
-
+<br>
 Liste des comptes: <a href="{{path('app_user_admin_show')}}">show</a>
+<br>
+<br>
+<h1> Gestion des produit</h1>
 
+<a href="{{ path('app_produit_crud_new')}}">Ajouter un nouveau produit</a>
+<br>
+<a href="{{ path('app_produit_crud_index')}}">liste des produit</a>
+<br>
+<br>
 
 {% endblock %}
