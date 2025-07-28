@@ -43,10 +43,6 @@ public function __construct(RubriqueRepository $rubriqueRepo, SousRubriqueReposi
     #[Route('/sousrubrique', name: 'app_sousrubrique')]
     public function sousrubriqueid(Request $request): Response
     {
-        $search = '<form method="post" action="search.php">
-                    <label for="recherche"></label>
-                    <input type="text" name="recherche" id="recherche" placeholder="recherche...">
-                    </form>';
         $param = $request->query->get('srid');
         $rubriques = $this->rubriqueRepo->FindAll();
         $produits = $this->produitRepo->getSomeProduit($param);

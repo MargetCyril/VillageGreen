@@ -44,8 +44,8 @@
                 <td>{{ user.refFournisseur }}</td>
                 <td>{{ user.coeffAchat }}</td>
                 <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_crud_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}">détail</a>
+                    <a href="{{ path('app_user_crud_edit', {'id': user.id}) }}">modifier</a>
                 </td>
             </tr>
         {% else %}

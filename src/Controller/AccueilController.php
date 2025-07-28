@@ -7,10 +7,11 @@ use App\Repository\SousRubriqueRepository;
 use App\Repository\ProduitRepository;
 use App\Repository\RubriqueRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-final class AccueilController extends AbstractController  
+final class AccueilController extends AbstractController
 {
     private $rubriqueRepo;
     private $produitRepo;
@@ -21,7 +22,6 @@ final class AccueilController extends AbstractController
         $this->rubriqueRepo = $rubriqueRepo;
         $this->produitRepo = $produitRepo;
         $this->sousrubRepo = $sousrubRepo;
-
     }
 
     #[Route('/accueil', name: 'app_accueil')]
@@ -40,39 +40,47 @@ final class AccueilController extends AbstractController
     }
 
 
-    public function navbar(): Response
+    public function navbar(Request $request): Response
     {
-        $search = $this->createForm(SearchForm::class);
         $rubriques = $this->rubriqueRepo->findAll();
 
-        if ($search->isSubmitted() && $search->isValid()) {
-            $recherche = $search->getData();
-            return $this->redirectToRoute('app_search', [
-                'recherche' => $recherche,
-            ]);
+        $searchform = $this->createForm(SearchForm::class);
+        $searchform->handleRequest($request);
+
+        if ($searchform->isSubmitted() && $searchform->isValid()) {
+            $data = $searchform->getData();
+            dd($data);
+             return $this->redirectToRoute('app_search', [
+                'data' => $data,
+            ]); 
         }
 
         return $this->render('navbar.html.twig', [
             'rubriques' => $rubriques,
-            'search' => $search,
+            'searchform' => $searchform,
 
         ]);
     }
 
-     #[Route('/search/{search}', name: 'app_search')]
-    public function search(): Response
+    #[Route('/search', name: 'app_search')]
+    public function search(Request $request): Response
     {
-         $produit = $this->produitRepo->search();
-        $sousrub = $this->sousrubRepo->search(); 
-        $rubrique = $this->rubriqueRepo->search(); 
+        $searchform = $this->createForm(SearchForm::class);
+        $searchform->handleRequest($request);
 
-        return $this->render('accueil/index.html.twig', [
+        if ($searchform->isSubmitted() && $searchform->isValid()) {
+            $data = $searchform->getData();
+            dd($data);
+             return $this->redirectToRoute('app_search', [
+                'data' => $data,
+            ]); 
+        }
+
+        return $this->render('accueil/search.html.twig', [
             'controller_name' => 'AccueilController',
-            'produit' => $produit,
-            'sousrubrique' => $sousrub,
-            'rubrique' => $rubrique,
+            'searchform' => $searchform,
+
 
         ]);
-    } 
-
+    }
 }

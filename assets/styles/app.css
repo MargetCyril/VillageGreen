@@ -16,6 +16,11 @@ nav a {
   color: white
 }
 
+.textbtn {
+text-decoration: none;
+  color: white
+}
+
 .nav-item{
   display: flex;
   margin-right:1rem;

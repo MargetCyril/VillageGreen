@@ -31,17 +31,18 @@
                 <td>{{ produit.refFournisseur }}</td>
                 <td>{{ produit.stock }}</td>
                 <td>
-                    <a href="{{ path('app_produit_crud_show', {'id': produit.id}) }}">show</a>
-                    <a href="{{ path('app_produit_crud_edit', {'id': produit.id}) }}">edit</a>
+                    <a href="{{ path('app_produit_crud_show', {'id': produit.id}) }}">détail</a>
+                    <a href="{{ path('app_produit_crud_edit', {'id': produit.id}) }}">modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="9">Aucun produit trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_produit_crud_new') }}">Create new</a>
+    <a href="{{ path('app_produit_crud_new') }}">Ajouter</a>
+    <a href="{{ path('app_user_crud_index') }}">Retour</a>
 {% endblock %}

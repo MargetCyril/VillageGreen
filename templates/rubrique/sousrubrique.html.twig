@@ -17,7 +17,7 @@
 							<p class="card-desc">{{produit.description}}</p>
 							<p>{{produit.prix}}</p>
 							<p>
-								<button class="button-card">Commander</button>
+								<button class="button-card"><a href="{{ path('app_panier_add', {id: produit.id}) }}" class="textbtn">Commander</a></button>
 							</p>
 						</div>
 					</div>

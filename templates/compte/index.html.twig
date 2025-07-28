@@ -5,7 +5,7 @@
 {% block body %}
 <h1>Mon Compte</h1>
 
-mon compte: <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+mon compte: <a href="{{ path('app_user_show', {'id': user.id}) }}">voir</a>
 <br>
 mes commandes: <a href="{{ path('app_commande_index')}}">voir</a>
 <br>
@@ -14,14 +14,14 @@ mes commandes: <a href="{{ path('app_commande_index')}}">voir</a>
 
 liste des commandes: <a href="{{ path('app_commande_adminindex')}}">voir</a>
 <br>
-Liste des comptes: <a href="{{path('app_user_admin_show')}}">show</a>
+Liste des comptes: <a href="{{path('app_user_admin_show')}}">voir</a>
 <br>
 <br>
 <h1> Gestion des produit</h1>
 
-<a href="{{ path('app_produit_crud_new')}}">Ajouter un nouveau produit</a>
+Ajouter un nouveau produit<a href="{{ path('app_produit_crud_new')}}">Ajouter</a>
 <br>
-<a href="{{ path('app_produit_crud_index')}}">liste des produit</a>
+liste des produits<a href="{{ path('app_produit_crud_index')}}">liste</a>
 <br>
 <br>
 
