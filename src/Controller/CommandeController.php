@@ -10,82 +10,98 @@ use App\Repository\ProduitRepository;
 use App\Repository\RubriqueRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Form\CommandeForm;
+
 
 use function Symfony\Component\Clock\now;
 
 #[Route('/commande', name: 'app_commande_')]
 final class CommandeController extends AbstractController
 {
-       private $rubriqueRepo;
+    private $rubriqueRepo;
 
-       private $commandeRepo;
+    private $commandeRepo;
 
-        public function __construct(RubriqueRepository $rubriqueRepo, CommandeRepository $commandeRepo)
+    public function __construct(RubriqueRepository $rubriqueRepo, CommandeRepository $commandeRepo)
     {
         $this->rubriqueRepo = $rubriqueRepo;
         $this->commandeRepo = $commandeRepo;
-
-    } 
+    }
 
     #[Route('/add', name: 'add')]
-    public function add(SessionInterface $session, ProduitRepository $produitRepo, EntityManagerInterface $em): Response
+    public function add(SessionInterface $session, ProduitRepository $produitRepo, EntityManagerInterface $em, Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
         $panier = $session->get('panier', []);
 
-        if($panier === []) {
+        if ($panier === []) {
             $this->addFlash('message', 'votre panier est vide');
             return $this->redirectToRoute('app_acceuil');
         }
 
+        $form = $this->createForm(CommandeForm::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            
+            $commande = new Commande();
+
+            $commande->setRefUser($this->getUser());
+            $user = $this->getUser();
+            $coeff = $user->getCoeffAchat();
+            $commande->setDateAchat(new \DateTime());
+            $commande->setMoyenPayement($data['moyen_payement']);
+            $total = 0;
+
+            foreach ($panier as $item => $quantity) {
+                $Paniers = new Panier();
+
+                $produit = $produitRepo->find($item);
+                $prix = $produit->getPrix();
+                $total = ($total + ($prix * $quantity));
+
+
+                $Paniers->setidproduit($produit);
+                $Paniers->setprix($prix);
+                $Paniers->setQuantite($quantity);
+
+                $commande->addidpanier($Paniers);
+            }
+            $commande->setPrixFinal($total);
+            $total = ($total * $coeff);
+            $commande->setTotal($total);
+
+
+            $em->persist($commande);
+            $em->flush();
+
+            $session->remove('panier');
         
-        $commande = new Commande();
 
-        $commande->setRefUser($this->getUser());
-        $user = $this->getUser();
-        $coeff = $user->getCoeffAchat();
-        $commande->setDateAchat(new \DateTime());
-        $total = 0;
-
-        foreach($panier as $item =>$quantity){
-            $Paniers = new Panier();
-
-            $produit = $produitRepo->find($item);
-            $prix = $produit->getPrix();
-            $total = ($total + ($prix*$quantity));
-
-
-            $Paniers->setidproduit($produit);
-            $Paniers->setprix($prix);
-            $Paniers->setQuantite($quantity);
-
-            $commande->addidpanier($Paniers);
-        }
-        $commande->setPrixFinal($total);
-        $total = ($total * $coeff);
-        $commande->setTotal($total);
-
-        $em->persist($commande);
-        $em->flush();
-
-        $session->remove('panier');
-
-            $this->addFlash('message', 'Commande créée avec succès');
-            return $this->redirectToRoute('app_accueil') ;
+        $this->addFlash('message', 'Commande créée avec succès');
+        return $this->redirectToRoute('app_accueil');
     }
 
-     #[Route('/index', name: 'index')]
+        return $this->render('commande/form.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/index', name: 'index')]
     public function index(): Response
     {
         $user = $this->getUser();
         $Id = $user->getId();
-        
+
         $commande = $this->commandeRepo->getSomeCommandes($Id);
-        
+
 
         $this->denyAccessUnlessGranted('ROLE_USER');
 
@@ -97,9 +113,9 @@ final class CommandeController extends AbstractController
     #[Route('/adminindex', name: 'adminindex')]
     public function adminindex(): Response
     {
-        
+
         $commande = $this->commandeRepo->findAll();
-        
+
 
         $this->denyAccessUnlessGranted('ROLE_USER');
 
@@ -114,7 +130,7 @@ final class CommandeController extends AbstractController
         $id = $commande->getId();
         $paniers = $panierRepo->getSome($id);
         //dd($paniers);
-        
+
 
         return $this->render('commande/detail.html.twig', [
             'paniers' => $paniers,
@@ -127,18 +143,16 @@ final class CommandeController extends AbstractController
     {
 
         if ($this->isGranted('ROLE_ADMIN')) {
-            
+
             $paniers = $panierRepo->getAll();
-            
+
             return $this->render('commande/detail.html.twig', [
                 'paniers' => $paniers,
 
-        ]);
-        } 
-        else {
+            ]);
+        } else {
             $user = $this->getUser();
             return $this->redirectToRoute('app_user_index', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
         }
-
     }
 }
