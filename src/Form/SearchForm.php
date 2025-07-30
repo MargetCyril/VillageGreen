@@ -23,6 +23,7 @@ class SearchForm extends AbstractType
     {
         $resolver->setDefaults([
             // Configure your form options here
+            "action" => "/search"
         ]);
     }
 }

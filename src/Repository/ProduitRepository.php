@@ -27,6 +27,17 @@ class ProduitRepository extends ServiceEntityRepository
         return $categories;
     }
 
+    public function getSome($param)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb 
+            ->andWhere('a.libelle like :param')
+            ->setParameter('param', '%'.$param.'%')
+            ->getQuery();
+        $categories = $qb->getQuery()-> getResult();
+        return $categories;
+    }
+
     //    /**
     //     * @return Produit[] Returns an array of Produit objects
     //     */

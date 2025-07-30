@@ -49,7 +49,6 @@ final class AccueilController extends AbstractController
 
         if ($searchform->isSubmitted() && $searchform->isValid()) {
             $data = $searchform->getData();
-            dd($data);
              return $this->redirectToRoute('app_search', [
                 'data' => $data,
             ]); 
@@ -62,24 +61,22 @@ final class AccueilController extends AbstractController
         ]);
     }
 
-    #[Route('/search', name: 'app_search')]
+    #[Route('/search/{data}', name: 'app_search')]
     public function search(Request $request): Response
     {
-        $searchform = $this->createForm(SearchForm::class);
-        $searchform->handleRequest($request);
-
-        if ($searchform->isSubmitted() && $searchform->isValid()) {
-            $data = $searchform->getData();
-            dd($data);
-             return $this->redirectToRoute('app_search', [
-                'data' => $data,
-            ]); 
-        }
+        $param = $request->get('data');
+       $produit = $this->produitRepo->getSome($param);
+       dd($produit);
+       /*  $sousrub = $this->sousrubRepo->findSome($param);
+        $rub = $this->rubriqueRepo->findSome($param);  */
 
         return $this->render('accueil/search.html.twig', [
             'controller_name' => 'AccueilController',
-            'searchform' => $searchform,
-
+            'data' => $param,
+            'produit' => $produit,
+           /*  'sousrub' => $sousrub,
+            'rubrique' => $rub,
+ */
 
         ]);
     }
