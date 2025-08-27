@@ -86,6 +86,14 @@ final class CommandeController extends AbstractController
         
 
         $this->addFlash('message', 'Commande créée avec succès');
+
+        $mail->send(
+            'no-reply@villagegreen.com',
+            $user->getEmail(),
+            'Votre commande a bien été enregistrée',
+            'commande',
+            compact('user', 'commande')
+        );
         return $this->redirectToRoute('app_accueil');
     }
 
