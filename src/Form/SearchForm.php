@@ -15,7 +15,7 @@ class SearchForm extends AbstractType
     {
         $builder
             ->add('search', TextType::class, ['constraints' => new Length(['min' => 3])] )
-            ->add('envoyer', SubmitType::class)
+            ->add('chercher', SubmitType::class)
         ;
     }
 
