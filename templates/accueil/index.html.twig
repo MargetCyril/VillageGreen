@@ -57,9 +57,11 @@
 						<p>{{produit.prix}}
 							€</p>
 						<p>
+						<a href="{{ path('app_panier_add', {id: produit.id}) }}" class="textbtn">
 							<button class="button-card">
-								<a href="{{ path('app_panier_add', {id: produit.id}) }}" class="textbtn">Commander</a>
+								Commander
 							</button>
+							</a>
 						</p>
 					</div>
 				</div>
