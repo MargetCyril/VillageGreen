@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Form\CommandeForm;
-
+use App\Service\SendMailService;
 
 use function Symfony\Component\Clock\now;
 
@@ -33,7 +33,7 @@ final class CommandeController extends AbstractController
     }
 
     #[Route('/add', name: 'add')]
-    public function add(SessionInterface $session, ProduitRepository $produitRepo, EntityManagerInterface $em, Request $request): Response
+    public function add(SessionInterface $session, ProduitRepository $produitRepo, EntityManagerInterface $em, Request $request, SendMailService $mail): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
@@ -41,7 +41,7 @@ final class CommandeController extends AbstractController
 
         if ($panier === []) {
             $this->addFlash('message', 'votre panier est vide');
-            return $this->redirectToRoute('app_acceuil');
+            return $this->redirectToRoute('app_accueil');
         }
 
         $form = $this->createForm(CommandeForm::class);
@@ -87,12 +87,11 @@ final class CommandeController extends AbstractController
 
         $this->addFlash('message', 'Commande créée avec succès');
 
-        $mail->send(
+        $mail->sendEmail(
             'no-reply@villagegreen.com',
             $user->getEmail(),
             'Votre commande a bien été enregistrée',
             'commande',
-            compact('user', 'commande')
         );
         return $this->redirectToRoute('app_accueil');
     }
